@@ -1,0 +1,33 @@
+@import 'bourbon/bourbon';
+@import 'neat/neat';
+
+$niceBlue: #D5EEFB;
+
+#main {
+  section {
+    text-align: center;
+    background: $niceBlue;
+    @include outer-container;
+    $mobile: new-breakpoint(max-width 500px 6);
+    #alpha {
+      text-align: left;
+      background: darken($niceBlue, 30%);
+      @include span-columns(4);
+      @include media($mobile) {
+        @include span-columns(3);
+      }
+    }
+    #beta {
+      text-align: left;
+      background: darken($niceBlue, 30%);
+      @include span-columns(8);
+      @include media($mobile) {
+        @include span-columns(3);
+      }
+    }
+    pre {
+      word-break: break-all;
+      word-wrap: break-word;
+    }
+  }
+}

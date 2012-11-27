@@ -1,0 +1,378 @@
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+        <section>
+          <h1>SASS/LESS</h1>
+          <h3>CSS extension languages</h3>
+          <p>
+            <small>by <a href="http://tellgren.com">Peter Tellgren</a> / <a href="http://twitter.com/petertellgren">@petertellgren</a></small>
+          </p>
+        </section>
+
+        <section>
+          <h2>Say What?</h2>
+          <p>Preprocessors that output CSS by utilizing some nice features</p>
+          <aside class="notes">
+          </aside>
+        </section>
+
+        <section>
+          <h2>Syntax</h2>
+          <p>
+            Both accept standard CSS.
+          </p>
+          <pre><code contenteditable>
+/* style.scss or style.less */
+h1 {
+  color: #0982C1;
+}
+          </code></pre>
+
+        </section>
+
+        <section>
+          <section>
+            <h2>Variables (@ / $)</h2>
+            <p>LESS (@)</p>
+            <pre><code contenteditable>
+@mainColor: #0982c1;
+@siteWidth: 1024px;
+@borderStyle: dotted;
+body {
+  color: @mainColor;
+  border: 1px @borderStyle @mainColor;
+  max-width: @siteWidth;
+}
+            </code></pre>
+            <p>SCSS ($)</p>
+            <pre><code contenteditable>
+$mainColor: #0982c1;
+$siteWidth: 1024px;
+$borderStyle: dotted;
+body {
+  color: $mainColor;
+  border: 1px $borderStyle $mainColor;
+  max-width: $siteWidth;
+}
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>CSS </h2>
+            <pre><code contenteditable>
+body {
+  color: #0982c1;
+  border: 1px dotted #0982c1;
+  max-width: 1024px;
+}
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Nesting</h2>
+            <p>
+              because CSS is horrible to read
+            </p>
+            <pre><code contenteditable>
+section {
+  margin: 10px;
+}
+section nav {
+  height: 25px;
+}
+section nav a {
+  color: #0982C1;
+}
+section nav a:hover {
+  text-decoration: underline;
+}
+            </code></pre>
+          </section>
+          <section>
+            <h2>SCSS / LESS</h2>
+            <pre><code contenteditable>
+section {
+  margin: 10px;
+  nav {
+    height: 25px;
+    a {
+      color: #0982C1;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Mixins</h2>
+            <p>
+              the dot vs the @
+            </p>
+            <pre><code contenteditable>
+/* Sass mixin error with (optional) argument $borderWidth */
+@mixin error($borderWidth: 2px) {
+  border: $borderWidth solid #F00;
+  color: #F00;
+}
+.generic-error {
+  /* ... */
+  @include error();
+}
+.login-error {
+  /* ... */
+  @include error(5px);
+}
+            </code></pre>
+          </section>
+          <section>
+            <h2>And the dot</h2>
+            <pre><code contenteditable>
+/* LESS mixin error with (optional) argument @borderWidth */
+.error(@borderWidth: 2px) {
+  border: @borderWidth solid #F00;
+  color: #F00;
+}
+.generic-error {
+  /* ... */
+  .error();
+}
+.login-error {
+  /* ... */
+  .error(5px);
+}
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <h2>Inheritance</h2>
+          <p>
+            SCSS
+          </p>
+          <pre><code contenteditable>
+.block {
+  margin: 10px 5px;
+  padding: 2px;
+}
+p {
+  @extend .block; /* Inherit styles from '.block' */
+  border: 1px solid #EEE;
+}
+ul, ol {
+  @extend .block; /* Inherit styles from '.block' */
+  color: #333;
+  text-transform: uppercase;
+}
+          </code></pre>
+          <p>Less works the same as with mixins</p>
+        </section>
+
+        <section>
+          <h2>Importing</h2>
+          <p>
+            Little boxes made of ticky tacky
+          </p>
+          <pre><code contenteditable>
+/* file.{type} (type in [.less, .scss])  */
+body {
+  background: #EEE;
+}
+
+@import "reset.css";
+@import "file.{type}";
+p {
+  background: #0982C1;
+}
+          </code></pre>
+          <p>Imports in CSS == BAD (multiple requests)</p>
+          <p>Imports in LESS/SCSS == GOOD, precompiled to one file, minified</p>
+        </section>
+
+        <section>
+          <h2>Color functions</h2>
+          <p>
+            Don't look for colors, let the computer do what it does best.
+          </p>
+          <table>
+            <tr class="base">
+              <th><strong>Function</strong></th>
+              <th><strong>SCSS</strong></th>
+              <th><strong>LESS</strong></th>
+            </tr>
+            <tr>
+              <td>lighten</td>
+              <td class="sass lighten">lighten($color, 10%);</td>
+              <td class="less lighten">lighten($color, 10%);</td>
+            </tr>
+            <tr>
+              <td>darken</td>
+              <td class="sass darken">darken($color, 10%);</td>
+              <td class="less darken">darken($color, 10%);</td>
+            </tr>
+            <tr>
+              <td>saturate</td>
+              <td class="sass saturate">saturate($color, 10%);</td>
+              <td class="less saturate">saturate($color, 10%);</td>
+            </tr>
+            <tr class="desat">
+              <td>desaturate</td>
+              <td class="sass desaturate">desaturate($color, 10%);</td>
+              <td class="less desaturate">desaturate($color, 10%);</td>
+            </tr>
+            <tr class="gray">
+              <td>grayscale</td>
+              <td class="sass grayscale">grayscale($color);</td>
+              <td class="less grayscale x">X</td>
+            </tr>
+            <tr class="spin">
+              <td>Spin</td>
+              <td class="sass spin x">X</td>
+              <td class="less spin">spin($color, 10);</td>
+            </tr>
+            <tr class="complement">
+              <td>complement</td>
+              <td class="sass complement">complement($color);</td>
+              <td class="less complement x">X</td>
+            </tr>
+            <tr class="invert">
+              <td>invert</td>
+              <td class="sass invert x">invert($color);</td>
+              <td class="less invert x">X</td>
+            </tr>
+            <tr class="mix">
+              <td>mix</td>
+              <td class="sass mix">mix($color1, $color2, 50%);</td>
+              <td class="less mix">mix($color1, $color2);</td>
+            </tr>
+          </table>
+          <br>
+          <p>Great for using with gradients</p>
+        </section>
+
+        <section>
+          <h2>Operations</h2>
+          <p>
+            More math, wohoo
+          </p>
+          <pre><code contenteditable>
+body {
+  margin: (14px/2);
+  top: 50px + 100px;
+  right: 100px - 50px;
+  left: 10 * 10;
+}
+          </code></pre>
+        </section>
+
+
+        <section>
+          <h2>SASS extras</h2>
+          <p>
+            LESS is more, but sometimes more is nice.
+          </p>
+          <pre><code contenteditable>
+/* if statement */
+@if lightness($color) > 30% {
+  background-color: #000;
+} @else {
+  background-color: #fff;
+}
+/* for loop */
+@for $i from 1px to 10px {
+  .border-#{i} {
+    border: $i solid blue;
+  }
+}
+/* Built in conversion table */
+2in + 3cm + 2pc = 3.514in /* LESS returns 7in */
+
+          </code></pre>
+        </section>
+
+        <section>
+          <section>
+            <h2>Installing them</h2>
+          </section>
+          <section>
+            <h2>SASS</h2>
+            <ul>
+              <li>Comes by default with new rails app</li>
+              <li>Other Ruby apps: <pre><code>gem install sass</code></pre></li>
+              <li>USE a framework (Compass, Bourbon), no need to reinvent the wheel</li>
+            </ul>
+          </section>
+          <section>
+            <h2>LESS</h2>
+             <ul>
+               <li>With Rails use <pre><code>gem 'less-rails'</code></pre></li>
+               <li>Other apps, use less.js (slow) or install parser with node package manager <pre><code>npm install less</code></pre></li>
+               <li>USE a framework (twitter-bootstrap) and let &lt;div&gt;-itis commence :)</li>
+             </ul>
+            </section>
+        </section>
+
+        <section>
+          <h2>Which one to use?</h2>
+          <p class="fragment">SASS of course!</p>
+          <h2 class="fragment">But Why?</h2>
+          <p class="fragment">Because, It's written in Ruby</p>
+          <p class="fragment"><img src="/images/sass-less/Trollface.png" width="120" height="120" style="border: 0px; box-shadow: none"></p>
+        </section>
+
+        <section>
+          <section>
+            <h2>Using a framework</h2>
+            <p>A nice gradient using bourbon</p>
+            <pre><code>
+$color: #777;
+header {
+  ...
+  @include linear-gradient($color, darken($color, 20%) ) ;
+  @include box-shadow( 0 0 6px 3px black );
+}
+            </code></pre>
+          </section>
+          <section>
+            <h2>output</h2>
+            <img src="/images/sass-less/banner.png" alt="banner" style="border:0px;box-shadow: none;">
+            <pre><code>
+header {
+  ...
+  background-color: #777;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #777), color-stop(100%, #444));
+  background-image: -webkit-linear-gradient(top, #777, #444);
+  background-image: -moz-linear-gradient(top, #777, #444);
+  background-image: -ms-linear-gradient(top, #777, #444);
+  background-image: -o-linear-gradient(top, #777, #444);
+  background-image: linear-gradient(top, #777, #444);
+  -webkit-box-shadow: 0 0 6px 3px black;
+  box-shadow: 0 0 6px 3px black;
+}
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <h2>Demo Time</h2>
+          <ul>
+            <li><a href="/sass-less/index.html">Semantic markup</a></li>
+            <li><a href="/sass-less/media-query.html">Media Queries</a></li>
+          </ul>
+        </section>
+
+        <section>
+          <h1>THE END</h1>
+          <h3>BY Peter Tellgren / minigrand.com</h3>
+        </section>
+
+      </div>
+
+    </div>

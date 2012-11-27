@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Neat Media Queries</title>
+    <link rel="stylesheet" href="css/mq.css">
+  </head>
+
+  <body id="main">
+    <section>
+      <pre>
+@include outer-container;
+$mobile: new-breakpoint(max-width 500px 6);
+      </pre>
+      <div id="alpha">
+        <pre>
+  @include span-columns(4);
+  @include media($mobile) {
+    @include span-columns(3);
+  }
+        </pre>
+      </div>
+      <div id="beta">
+        <pre>
+  @include span-columns(8);
+  @include media($mobile) {
+    @include span-columns(3);
+  }
+        </pre>
+      </div>
+    </section>
+  </body>
+
+</html>

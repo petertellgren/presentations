@@ -1,0 +1,47 @@
+@import 'bourbon/bourbon';
+@import 'neat/neat';
+
+body {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+#content {
+  padding-top: 60px;
+  @include outer-container;
+  aside#menu {
+    @include span-columns(3);
+    background: red;
+    height: 50px;
+    padding: 5px;
+  }
+  section#main {
+    @include span-columns(9);
+    pre {
+      font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
+      color: #333;
+      background: whiteSmoke;
+      padding: 9.5px;
+      margin: 0 0 10px;
+      font-size: 13px;
+      line-height: 20px;
+      word-break: break-all;
+      word-wrap: break-word;
+      white-space: pre;
+      white-space: pre-wrap;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      @include border-radius(4px);
+    }
+    ul#features {
+      overflow: auto;
+      padding-left: 0px;
+      li {
+        @include span-columns(4);
+        @include nth-omega(3n);
+        height: 50px;
+        background: blue;
+        color: white;
+        padding: 5px;
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+@charset "UTF-8";
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+body {
+  zoom: 1;
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  color: #333; }
+  body:before, body:after {
+    content: "";
+    display: table; }
+  body:after {
+    clear: both; }
+  body ul#frameworks {
+    overflow: auto;
+    padding-left: 0px; }
+    body ul#frameworks li {
+      display: block;
+      float: left;
+      margin-right: 2.35765%;
+      width: 48.82117%; }
+      body ul#frameworks li:last-child {
+        margin-right: 0; }
+      body ul#frameworks li:nth-child(2n) {
+        margin-right: 0; }
+      body ul#frameworks li:first-child  {
+        border-right: 1px solid #333; }
